@@ -1,0 +1,8 @@
+attrs==22.2.0
+-e git+ssh://git@github.com/Anatoly-sh/course_4_hw_1.git@2303393a8e6651768d95ae8d67ed5f742f002bf1#egg=course_4_hw_1
+coverage==7.1.0
+iniconfig==2.0.0
+packaging==23.0
+pluggy==1.0.0
+pytest==7.2.1
+pytest-cov==4.0.0
