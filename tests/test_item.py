@@ -17,7 +17,7 @@ def test_item(item_1):
     assert item_1.quantity == 60
 
 
-def test_kind_amount(item_1):
+def calculate_total_price(item_1):
     item2 = Item('Бумага уп.', 400, 50)
     assert item_1.calculate_total_price() == 9000
     assert item2.apply_discount() == 340
