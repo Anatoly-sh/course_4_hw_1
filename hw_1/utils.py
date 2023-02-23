@@ -8,7 +8,7 @@ class Item:
         self.price = price
         self.quantity = quantity
 
-    def kind_amount(self):
+    def calculate_total_price(self):
         """получить общую стоимость конкретного товара в магазине"""
         return self.price * self.quantity
 
@@ -23,8 +23,8 @@ if __name__ == '__main__':
     item2 = Item("Ноутбук", 20000, 5)
     Item.items_list.append(item2)
 
-    print(item1.kind_amount())
-    print(item2.kind_amount())
+    print(item1.calculate_total_price())
+    print(item2.calculate_total_price())
 
     Item.discount_rate = 0.8  # устанавливаем новый уровень цен
 
