@@ -45,4 +45,4 @@ class Item:
 
     def apply_discount(self):
         """применить установленную скидку для конкретного товара"""
-        return self.price * Item.discount_rate  # дисконтная стоимость (проверить!)
+        return self.price * Item.discount_rate  # дисконтная стоимость
