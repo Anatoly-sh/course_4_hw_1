@@ -10,7 +10,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-        # Item.items_list.append(self)
+        # self.items_list.append(self)
 
     @property
     def name(self) -> str:
@@ -19,12 +19,11 @@ class Item:
 
     @name.setter
     def name(self, value):
-        """Контролирует длину названия товра в setter"""
+        """Контролирует длину названия товара в setter"""
         if len(value) > 10:
-            print("Exception: Длина наименования товара превышает 10 символов")
+            raise ValueError("Длина наименования товара превышает 10 символов")
         else:
             self.__name = value
-
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -50,12 +49,18 @@ class Item:
 
 
 if __name__ == '__main__':
-
-
-    # Item.instantiate_from_csv()
     # print(len(Item.items_list))
+    # item1 = Item('Ручка гелевая', 150, 60)
+    # item1.name = 'Суперсмартфон'
+    # print((Item.items_list[0].name))
     #
-    # """ожидаемое поведение"""
+    # # !!!!!!!!!!!!!!!! - это имя (адрес/ссылка) первого экземпляра: Item.items_list[1]
+    # print(type(Item.items_list[0]))
+
+    Item.instantiate_from_csv()
+    print(len(Item.items_list))
+    #
+    # '''ожидаемое поведение'''
     # item = Item('Телефон', 10000, 5)
     # item.name = 'Смартфон'
     # print(item.name)
@@ -89,5 +94,4 @@ if __name__ == '__main__':
     # print(Item.items_list[0].name)
     # print(Item.items_list[0].price)
     # print(Item.items_list)
-
 
