@@ -12,6 +12,12 @@ class Item:
         self.quantity = quantity
         # self.items_list.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"
+
     @property
     def name(self) -> str:
         """возвращает название товра - это getter"""
@@ -46,3 +52,10 @@ class Item:
     def apply_discount(self):
         """применить установленную скидку для конкретного товара"""
         return self.price * Item.discount_rate  # дисконтная стоимость
+
+
+if __name__ == '__main__':
+    item1 = Item("Смартфон", 10000, 20)
+
+    item1
+    print(item1)

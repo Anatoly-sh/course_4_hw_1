@@ -12,6 +12,12 @@ def item_2():
     return Item('Бумага уп.', 400, 50)
 
 
+@pytest.fixture
+def item_3():
+    item3 = Item('Ручка гелевая', 160, 60)
+    return item3
+
+
 def test_item_init(item_1):
     assert item_1.name == 'Ручка гелевая'
     assert item_1.price == 160
@@ -53,3 +59,9 @@ def test_is_integer():
     assert Item.is_integer(5) is True
     assert Item.is_integer(5.0) is True
     assert Item.is_integer(5.5) is False
+
+
+def test_repr_str(item_3):
+    assert item_3.__repr__() == "Item('Ручка гелевая', 160, 60)"
+    assert str(item_3) == 'Ручка гелевая'
+
