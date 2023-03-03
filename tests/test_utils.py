@@ -1,5 +1,9 @@
 import pytest
-from hw_1.utils import Item
+from hw_1.utils import Item, Phone
+
+
+class Tmp:
+    pass
 
 
 @pytest.fixture
@@ -16,6 +20,18 @@ def item_2():
 def item_3():
     item3 = Item('Ручка гелевая', 160, 60)
     return item3
+
+
+@pytest.fixture
+def phone_1():
+    phone1 = Phone("iPhone14", 90_000, 15, 2)
+    return phone1
+
+
+@pytest.fixture
+def tmp_1():
+    tmp1 = Tmp()
+    return tmp1
 
 
 def test_item_init(item_1):
@@ -64,4 +80,20 @@ def test_is_integer():
 def test_repr_str(item_3):
     assert item_3.__repr__() == "Item('Ручка гелевая', 160, 60)"
     assert str(item_3) == 'Ручка гелевая'
+
+
+def test_repr_str_phone(phone_1):
+    assert phone_1.__repr__() == "Phone('iPhone14', 90000, 15, 2)"
+    assert str(phone_1) == 'iPhone14'
+
+
+def test_number_of_sim(phone_1):
+    phone_1.number_of_sim = 11
+    assert phone_1.number_of_sim == 11
+
+
+def test_add(phone_1, item_1, tmp_1):
+    assert phone_1 + item_1 == 75
+    with pytest.raises(TypeError):
+        phone_1 + tmp_1
 
