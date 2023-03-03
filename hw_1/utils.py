@@ -55,10 +55,42 @@ class Item:
 
 
 class Phone(Item):
+    def __init__(self, name, price, quantity, number_of_sim):
+        super().__init__(name, price, quantity)
+        self._number_of_sim = number_of_sim
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self._number_of_sim})"
+
+    @property
+    def number_of_sim(self) -> int:
+        """возвращает количество сим-карт"""
+        return self._number_of_sim
+
+    @number_of_sim.setter
+    def number_of_sim(self, val):
+        """Контролирует допустимое количество сим-карт"""
+        if val > 0:
+            self._number_of_sim = val
+        else:
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        raise TypeError("Объект 'other' не принадлежит нужному классу")
 
 
 if __name__ == '__main__':
-    item1 = Item("Смартфон", 10000, 20)
+    # tmp1 = Tmp()
 
-    item1
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Phone("iPhone14", 90_000, 15, 2)
+
     print(item1)
+    print(item2)
+    item2.number_of_sim = 1
+    print(item2.number_of_sim)
+
+    # print(repr(item2))
+    # item2.number_of_sim = 0
