@@ -54,6 +54,9 @@ class Item:
         return self.price * Item.discount_rate  # дисконтная стоимость
 
 
+class Phone(Item):
+
+
 if __name__ == '__main__':
     item1 = Item("Смартфон", 10000, 20)
 
