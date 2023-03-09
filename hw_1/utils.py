@@ -81,6 +81,25 @@ class Phone(Item):
         raise TypeError("Объект 'other' не принадлежит нужному классу")
 
 
+class MixinLog:
+    language = 'EN'
+
+    def __init__(self):
+        self.language = MixinLog.language
+
+    def chang_lang(self):
+        if:
+            self.language = 'RU'
+        else:
+            self.language = 'EN'
+
+
+class KeyBoard(Item, MixinLog):
+    def __init__(self, name, price, quantity, language):
+        super().__init__(name, price, quantity)
+        super(MixinLog).__init__(language)
+
+
 if __name__ == '__main__':
     # tmp1 = Tmp()
 
