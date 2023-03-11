@@ -11,6 +11,7 @@ class Item:
         self.price = price
         self.quantity = quantity
         # self.items_list.append(self)
+        # super().__init__()
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
@@ -84,32 +85,46 @@ class Phone(Item):
 class MixinLog:
     language = 'EN'
 
-    def __init__(self):
+    def __init__(self, *args):
         self.language = MixinLog.language
+        super().__init__(*args)
 
-    def chang_lang(self):
-        if:
+    def change_lang(self):
+        if self.language == 'EN':
             self.language = 'RU'
         else:
             self.language = 'EN'
 
 
-class KeyBoard(Item, MixinLog):
-    def __init__(self, name, price, quantity, language):
-        super().__init__(name, price, quantity)
-        super(MixinLog).__init__(language)
+class KeyBoard(MixinLog, Item):
+    pass
 
 
 if __name__ == '__main__':
     # tmp1 = Tmp()
-
-    item1 = Item("Смартфон", 10000, 20)
-    item2 = Phone("iPhone14", 90_000, 15, 2)
-
-    print(item1)
-    print(item2)
-    item2.number_of_sim = 1
-    print(item2.number_of_sim)
+    # 4
+    # item1 = Item("Смартфон", 10000, 20)
+    # item2 = Phone("iPhone14", 90_000, 15, 2)
+    #
+    # print(item1)
+    # print(item2)
+    # item2.number_of_sim = 1
+    # print(item2.number_of_sim)
 
     # print(repr(item2))
     # item2.number_of_sim = 0
+
+    # 5
+    # print(KeyBoard.__mro__)
+
+    kb = KeyBoard('Dark Project KD87A', 9600, 5)
+    print(kb)
+    print(kb.price)
+    print(kb.quantity)
+    print(kb.language)
+    kb.change_lang()
+    print(kb.language)
+    kb.change_lang()
+    print(kb.language)
+    kb.change_lang()
+    print(kb.language)
