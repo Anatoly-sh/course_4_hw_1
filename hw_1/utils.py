@@ -83,17 +83,22 @@ class Phone(Item):
 
 
 class MixinLog:
-    language = 'EN'
+    LANGUAGE = 'EN'
 
     def __init__(self, *args):
-        self.language = MixinLog.language
+        self.__language = MixinLog.LANGUAGE
         super().__init__(*args)
 
+    @property
+    def language(self):
+        return self.__language
+
     def change_lang(self):
-        if self.language == 'EN':
-            self.language = 'RU'
+        if self.__language == 'RU':
+            self.__language = 'EN'
         else:
-            self.language = 'EN'
+            self.__language = 'RU'
+        return self.__language
 
 
 class KeyBoard(MixinLog, Item):
@@ -124,7 +129,6 @@ if __name__ == '__main__':
     print(kb.language)
     kb.change_lang()
     print(kb.language)
-    kb.change_lang()
-    print(kb.language)
-    kb.change_lang()
-    print(kb.language)
+
+    # kb.language = 'CH'
+    # print(kb.language)
