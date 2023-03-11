@@ -129,6 +129,6 @@ if __name__ == '__main__':
     print(kb.language)
     kb.change_lang()
     print(kb.language)
-
+    print(kb.__repr__())
     # kb.language = 'CH'
     # print(kb.language)

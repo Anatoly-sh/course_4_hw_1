@@ -1,5 +1,5 @@
 import pytest
-from hw_1.utils import Item, Phone
+from hw_1.utils import Item, Phone, MixinLog, KeyBoard
 
 
 class Tmp:
@@ -96,4 +96,14 @@ def test_add(phone_1, item_1, tmp_1):
     assert phone_1 + item_1 == 75
     with pytest.raises(TypeError):
         phone_1 + tmp_1
+
+
+def test_keyboard_class():
+    kb = KeyBoard('Dark Project KD87A', 9600, 5)
+    assert kb.__repr__() == "KeyBoard('Dark Project KD87A', 9600, 5)"
+    assert kb.language == 'EN'
+    kb.change_lang()
+    assert kb.language == 'RU'
+    with pytest.raises(AttributeError):
+        kb.language = 'CH'
 
