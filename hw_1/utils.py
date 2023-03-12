@@ -5,13 +5,12 @@ class Item:
     """Класс вида товара с наименованием, ценой и количеством"""
     discount_rate = 0.85  # уровень цен с учетом скидки
     items_list = []  # хранение созданных экземпляров класса
+    PATH_TO_FILE_CSV = '../data/items.csv'
 
     def __init__(self, name, price, quantity):
         self.__name = name
         self.price = price
         self.quantity = quantity
-        # self.items_list.append(self)
-        # super().__init__()
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
@@ -34,10 +33,21 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('items.csv', 'r', encoding='windows-1251') as file:
-            csv_file = csv.DictReader(file)
-            for row in csv_file:
-                Item.items_list.append(cls(name=row['name'], price=float(row['price']), quantity=int(row['quantity'])))
+        """Считывает данные из csv-файла и создает экземпляры класса, инициализируя их данными из файла,
+         и отправляет на хранение добавлением в список"""
+        try:
+            with open(cls.PATH_TO_FILE_CSV, 'r', encoding='cp1251') as file:
+                csv_file = csv.DictReader(file)
+                for row in csv_file:
+                    if list(row.keys()) == ['name', 'price', 'quantity']:
+                        Item.items_list.append(cls(name=row['name'], price=float(row['price']),
+                                                   quantity=int(row['quantity'])))
+                    else:
+                        raise InstantiateCSVError
+        except FileNotFoundError:
+            print(f"По адресу '{cls.PATH_TO_FILE_CSV}' файл item.csv отсутствует")
+        except InstantiateCSVError:
+            print("Файл item.csv повреждён")
 
     @staticmethod
     def is_integer(num) -> bool:
@@ -123,6 +133,13 @@ class InstantiateCSVError(Exception):
         """возвращает тип ошибки и сообщение"""
         return "InstantiateCSVError: " + str(self.message)
 
+class InstantiateCSVError(Exception):   # vt urina
+    """Класс-исключение для ошибок, связанных с повреждением файла"""
+    def __init__(self, *args):
+        self.message = args[0] if args else "Неизвестная ошибка"
+
+    def __str__(self):
+        return self.message
 
 if __name__ == '__main__':
     # tmp1 = Tmp()
