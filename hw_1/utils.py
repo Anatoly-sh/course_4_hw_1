@@ -102,7 +102,8 @@ class MixinLog:
 
 
 class KeyBoard(MixinLog, Item):
-    pass
+    def __init__(self, *args):
+        super().__init__(*args)
 
 
 if __name__ == '__main__':
