@@ -106,6 +106,24 @@ class KeyBoard(MixinLog, Item):
         super().__init__(*args)
 
 
+class InstantiateCSVError(Exception):
+    """Класс InstantiateCSVError:
+    обрабатывает исключения, возникающие
+    при открытии csv-файла в случае его повреждения.
+    Атрибут: message (сообщение об ошибке)
+    Методы: __init__, __str__- возвращает строку для печати с сообщением об ошибке
+    """
+    def __init__(self, message=""):
+        if message:
+            self.message = message
+        else:
+            self.message = None
+
+    def __str__(self):
+        """возвращает тип ошибки и сообщение"""
+        return "InstantiateCSVError: " + str(self.message)
+
+
 if __name__ == '__main__':
     # tmp1 = Tmp()
     # 4
