@@ -38,7 +38,7 @@ class Item:
         и отправляет на хранение добавлением в список
         """
         try:
-            with open(cls.PATH_TO_FILE_CSV, 'r', encoding='cp1251') as file:
+            with open(cls.PATH_TO_FILE_CSV, 'r') as file:
                 csv_file = csv.DictReader(file)
                 for row in csv_file:
                     if list(row.keys()) == ['name', 'price', 'quantity']:
@@ -160,4 +160,8 @@ if __name__ == '__main__':
     # print(kb.language)
     # 6
     Item.instantiate_from_csv()
+    print(len(Item.items_list))
+
+    for raw in Item.items_list:
+        print(raw.name, raw.price, raw.quantity)
 
