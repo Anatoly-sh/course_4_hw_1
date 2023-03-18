@@ -1,6 +1,6 @@
 import pytest
 from hw_1.utils import Item, Phone, MixinLog, KeyBoard
-from utils.csverror import InstantiateCSVError
+from hw_1.utils import InstantiateCSVError
 
 
 class Tmp:
@@ -126,12 +126,9 @@ def test_csv_err_raise():
         raise InstantiateCSVError("Файл поврежден")
 
 
-def test_load_from_csv(patf_csv_file: str) -> list:     # не нужен!!!!!!!!!!!!!!!!!!!!!!!!
-    """файл существует, все столбцы присутствуют"""
-    item = Goods("name", 50, 2)
-    assert len(item.load_from_csv(patf_csv_file)) == 5
-    assert isinstance(item.load_from_csv(patf_csv_file)[0], Goods)
-    assert repr(item.load_from_csv(patf_csv_file)[0]) == "Goods(_Goods__name=Смартфон, price=100, quantity=1)"
+def test_instantiate_csv_error():
+    e = InstantiateCSVError()
+    assert (str(e)) == "Неизвестная ошибка"
 
 
 def test_load_from_csv_no_file(mouse: Goods):
@@ -144,6 +141,16 @@ def test_load_from_csv_no_fieldnames(wrong_csv_file, mouse: Goods):
     """файл существует, нет столбца"""
     with pytest.raises(InstantiateCSVError):
         mouse.load_from_csv(wrong_csv_file)
+
+        # Илья
+def test_file_no_found():
+    with pytest.raises(FileNotFoundError):
+        Items.instantiate_from_csv('data.csv')
+
+def test_file_is_damaged():
+    with pytest.raises(InstantiateError.InstantiateCSVError):
+        Items.instantiate_from_csv(Items.instantiate_from_csv(os.path.join('utils', 'items2.csv')))
+
 
 
 

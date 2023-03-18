@@ -33,18 +33,19 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        """Считывает данные из csv-файла и создает экземпляры класса, инициализируя их данными из файла,
-         и отправляет на хранение добавлением в список"""
+        """
+        Считывает данные из csv-файла и создает экземпляры класса, инициализируя их данными из файла,
+        и отправляет на хранение добавлением в список
+        """
         try:
             with open(cls.PATH_TO_FILE_CSV, 'r', encoding='cp1251') as file:
                 csv_file = csv.DictReader(file)
-                print(csv_file)
                 for row in csv_file:
                     if list(row.keys()) == ['name', 'price', 'quantity']:
                         Item.items_list.append(cls(name=row['name'], price=float(row['price']),
                                                    quantity=int(row['quantity'])))
                     else:
-                        raise InstantiateCSVError()
+                        raise InstantiateCSVError
         except FileNotFoundError:
             print(f"По адресу '{cls.PATH_TO_FILE_CSV}' файл item.csv отсутствует")
         except InstantiateCSVError:
@@ -117,7 +118,7 @@ class KeyBoard(MixinLog, Item):
         super().__init__(*args)
 
 
-class InstantiateCSVError(Exception):   # vt urina
+class InstantiateCSVError(Exception):
     """
     Класс-исключение, обрабатывает исключения, возникающие
     при открытии csv-файла в случае его повреждения.
@@ -159,8 +160,4 @@ if __name__ == '__main__':
     # print(kb.language)
     # 6
     Item.instantiate_from_csv()
-    # with open(Item.PATH_TO_FILE_CSV) as File:
-    #     reader = csv.reader(File, delimiter=',', quotechar=',',
-    #                         quoting=csv.QUOTE_MINIMAL)
-    #     for row in reader:
-    #         print(row)
+
