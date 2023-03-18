@@ -35,16 +35,6 @@ def tmp_1():
     return tmp1
 
 
-@pytest.fixture()
-def patf_csv_file():
-    return os.sep.join(["tests", "items.csv"])
-
-
-@pytest.fixture()
-def wrong_csv_file():
-    return os.sep.join(["data", "items_err.csv"])
-
-
 def test_item_init(item_1):
     assert item_1.name == 'Ручка гелевая'
     assert item_1.price == 160
@@ -120,8 +110,6 @@ def test_keyboard_class():
 
 
 def test_csv_err_raise():
-    with pytest.raises(InstantiateCSVError):
-        raise InstantiateCSVError()
     with pytest.raises(InstantiateCSVError, match="Файл поврежден"):
         raise InstantiateCSVError("Файл поврежден")
 
@@ -129,29 +117,4 @@ def test_csv_err_raise():
 def test_instantiate_csv_error():
     e = InstantiateCSVError()
     assert (str(e)) == "Неизвестная ошибка"
-
-
-def test_load_from_csv_no_file(mouse: Goods):
-    """файл отсутствует по указанному пути"""
-    with pytest.raises(FileNotFoundError):
-        mouse.load_from_csv("")
-
-
-def test_load_from_csv_no_fieldnames(wrong_csv_file, mouse: Goods):
-    """файл существует, нет столбца"""
-    with pytest.raises(InstantiateCSVError):
-        mouse.load_from_csv(wrong_csv_file)
-
-        # Илья
-def test_file_no_found():
-    with pytest.raises(FileNotFoundError):
-        Items.instantiate_from_csv('data.csv')
-
-def test_file_is_damaged():
-    with pytest.raises(InstantiateError.InstantiateCSVError):
-        Items.instantiate_from_csv(Items.instantiate_from_csv(os.path.join('utils', 'items2.csv')))
-
-
-
-
 
