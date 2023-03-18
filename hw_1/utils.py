@@ -41,7 +41,7 @@ class Item:
             with open(cls.PATH_TO_FILE_CSV, 'r') as file:
                 csv_file = csv.DictReader(file)
                 for row in csv_file:
-                    print(row)
+                    # print(row)
                     if list(row.keys()) == ['name', 'price', 'quantity']:
                         Item.items_list.append(cls(name=row['name'], price=float(row['price']),
                                                    quantity=int(row['quantity'])))
