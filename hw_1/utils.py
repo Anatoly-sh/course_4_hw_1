@@ -1,11 +1,14 @@
 import csv
+import pathlib
+
+dir_path = pathlib.Path.cwd()
 
 
 class Item:
     """Класс вида товара с наименованием, ценой и количеством"""
     discount_rate = 0.85  # уровень цен с учетом скидки
     items_list = []  # хранение созданных экземпляров класса
-    PATH_TO_FILE_CSV = 'data/items.csv'
+    PATH_TO_FILE_CSV = f'{dir_path}/data/items.csv'
 
     def __init__(self, name, price, quantity):
         self.__name = name
@@ -165,4 +168,7 @@ if __name__ == '__main__':
 
     for raw in Item.items_list:
         print(raw.name, raw.price, raw.quantity)
+
+
+
 
